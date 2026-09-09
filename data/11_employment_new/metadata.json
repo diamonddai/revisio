@@ -1,0 +1,56 @@
+{
+  "meta": {
+    "case_id": "civilian_unemployment_rate_full",
+    "title": "Unemployment Rate",
+    "subtitle": "",
+    "description": "Historical US Civilian Unemployment Rate (seasonally adjusted) covering 1948 to 2024, with NBER recession shading. Data from FRED (Federal Reserve Economic Data).",
+    "data_source": "U.S. Bureau of Labor Statistics via FRED",
+    "data_source_url": "https://fred.stlouisfed.org/graph/?g=1T5ys"
+  },
+  "data": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "unit": "Year",
+      "domain": [
+        "1948",
+        "2024"
+      ]
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "unit": "%",
+      "domain": [
+        0.0,
+        15.0
+      ]
+    }
+  },
+  "chart": {
+    "type": "line",
+    "width": 900,
+    "height": 550,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        {
+          "test": "datum == 'Unemployment Rate'",
+          "value": "#2171b5"
+        }
+      ]
+    },
+    "trend_lines": null
+  },
+  "text": {
+    "title": "Unemployment Rate",
+    "subtitle": "",
+    "data_source": "U.S. Bureau of Labor Statistics via FRED",
+    "data_source_url": "https://fred.stlouisfed.org/graph/?g=1T5ys",
+    "annotations": [
+      "Shaded areas indicate U.S. recessions",
+      "Source: U.S. Bureau of Labor Statistics via FRED\u00ae"
+    ]
+  }
+}

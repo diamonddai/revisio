@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "case_id": "01_global_temperature",
+    "title": "Global Land and Ocean Average Temperature Anomaly",
+    "subtitle": null,
+    "description": "Global and hemispheric temperature anomalies are with respect to the 1901-2000 average",
+    "data_source": "NOAA National Centers for Environmental Information",
+    "data_source_url": "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series"
+  },
+
+  "data": {
+    "x": {
+      "field": "year",
+      "type": "quantitative",
+      "unit": null,
+      "domain": [
+        1850,
+        2025
+      ]
+    },
+    "y": {
+      "field": "anomaly_c",
+      "type": "quantitative",
+      "unit": "°C",
+      "domain": [-1, 1.5]
+    },
+    "y2": {
+      "field": "anomaly_f",
+      "type": "quantitative",
+      "unit": "°F",
+      "domain": [-1.8, 2.7]
+    }
+  },
+
+  "chart": {
+    "type": "bar",
+    "width": 900,
+    "height": 420,
+    "background": "#ffffff",
+    "color": {
+      "type": "conditional",
+      "rules": [
+        { "test": ">=0", "value": "#B3192B" },
+        { "test": "<0", "value": "#2266AC" }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Global Land and Ocean Average Temperature Anomaly",
+    "subtitle": null,
+    "data_source": "NOAA National Centers for Environmental Information",
+    "data_source_url": "https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/global/time-series",
+    "annotations": []
+  }
+}

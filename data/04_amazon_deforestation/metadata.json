@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "case_id": "amazon_deforestation_rates",
+    "title": "Deforestation rates - Legal Amazon - States",
+    "subtitle": null,
+    "description": "Annual deforestation rates in the Brazilian Legal Amazon from 1988 to 2025.",
+    "data_source": "TerraBrasilis (INPE)",
+    "data_source_url": "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"
+  },
+
+  "data": {
+    "x": {
+      "field": "year",
+      "type": "ordinal",
+      "unit": null,
+      "domain": [1988, 2025]
+    },
+    "y": {
+      "field": "area",
+      "type": "quantitative",
+      "unit": "km²",
+      "domain": [0, 35000]
+    }
+  },
+
+  "chart": {
+    "type": "bar",
+    "width": 900,
+    "height": 500,
+    "background": "#ffffff",
+    "color": {
+      "type": "conditional",
+      "rules": [
+        { "test": "year == 2025", "value": "#d46c31" },
+        { "test": "year != 2025", "value": "#f7d570" }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Deforestation rates - Legal Amazon - States",
+    "subtitle": null,
+    "data_source": "TerraBrasilis (INPE)",
+    "data_source_url": "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates",
+    "annotations": []
+  }
+}

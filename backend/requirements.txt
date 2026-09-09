@@ -1,0 +1,16 @@
+fastapi
+uvicorn[standard]
+pydantic
+pydantic-settings
+python-multipart
+pyyaml
+langgraph
+langchain-core
+pytest
+httpx
+vl-convert-python
+scipy
+numpy
+dtaidistance
+matplotlib
+tabulate

@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "case_id": "fred_smoothed_us_recession_probabilities",
+    "title": "Smoothed U.S. Recession Probabilities",
+    "subtitle": null,
+    "description": "Historical smoothed probabilities of the United States economy being in a recession based on Chauvet and Piger's model, with shaded bands indicating periods of NBER-defined recessions.",
+    "data_source": "Chauvet, Marcelle; Piger, Jeremy Max via FRED®",
+    "data_source_url": "https://fred.stlouisfed.org/series/RECPROUSM156N"
+  },
+
+  "data": {
+    "x": {
+      "field": "observation_date",
+      "type": "temporal",
+      "unit": "Year",
+      "domain": ["1967", "2026"]
+    },
+    "y": {
+      "field": "RECPROUSM156N",
+      "type": "quantitative",
+      "unit": "Percent",
+      "domain": [0, 110]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 950,
+    "height": 280,
+    "background": "#f0f4f8",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        {
+          "test": "datum == 'Smoothed U.S. Recession Probabilities'",
+          "value": "#005d9e"
+        }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "FRED®",
+    "subtitle": null,
+    "data_source": "Chauvet, Marcelle; Piger, Jeremy Max via FRED®",
+    "data_source_url": "https://fred.stlouisfed.org/series/RECPROUSM156N",
+    "annotations": [
+      "Sources: Chauvet, Marcelle; Piger, Jeremy Max via FRED®",
+      "Shaded areas indicate U.S. recessions.",
+      "fred.stlouisfed.org"
+    ]
+  }
+}

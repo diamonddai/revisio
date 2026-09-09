@@ -1,0 +1,118 @@
+rule_source: taxonomy_v3
+rule_version: v3
+
+personas:
+  Amplifier:
+    - id: amp_v3_1
+      role: "Amplifier"
+      motivation: "amplify visibility"
+      style: "change packaging rather than core data"
+      category: "Amplifier"
+  Analyst:
+    - id: ext_v3_1
+      role: "Extender"
+      motivation: "broaden interpretation scope"
+      style: "add context variables and explanatory framing"
+      category: "Analyst"
+  Bridger:
+    - id: bri_v3_1
+      role: "Bridger"
+      motivation: "cross-group mediation"
+      style: "balance clarity and transportability"
+      category: "Bridger"
+  Adverser:
+    - id: adv_v3_1
+      role: "Adverser"
+      motivation: "reshape narrative interpretation"
+      style: "cross-layer reframing with selective evidence"
+      category: "Adverser"
+
+operation_whitelist:
+  Amplifier:
+    - "add_annotation"
+    - "change_title"
+    - "change_color"
+    - "change_chart_type"
+    - "change_annotation"
+    - "simplify_axis"
+  Analyst:
+    # Extender: expands topic context — does NOT filter/select data variables
+    - "add_data_variables"
+    - "change_data_granularity"
+    - "change_axis_scale"
+    - "add_legend"
+    - "change_legend"
+    - "add_annotation"
+    - "change_title"
+  Bridger:
+    - "add_annotation"
+    - "change_title"
+    - "change_color"
+    - "change_chart_type"
+    - "simplify_axis"
+    - "add_background"
+  Adverser:
+    - "select_data_range"
+    - "delete_source"
+    - "change_data_granularity"
+    - "change_chart_type"
+    - "change_title"
+    - "change_annotation"
+    - "add_annotation"
+    - "change_color"
+    - "simplify_axis"
+
+operation_layer:
+  add_annotation: text
+  change_title: text
+  change_color: visual
+  add_data_variables: data
+  select_data_range: data
+  delete_source: data
+
+shift_prior:
+  Amplifier:
+    resonance: minor
+    tension: minor
+    conflict: sig
+    noise: none
+  Analyst:
+    resonance: minor
+    tension: sig
+    conflict: sig
+    noise: none
+  Bridger:
+    resonance: minor
+    tension: minor
+    conflict: sig
+    noise: none
+  Adverser:
+    resonance: sig
+    tension: sig
+    conflict: major
+    noise: none
+
+# F2 role transition tendency (source role -> next role weights).
+# Roles must use backend canonical categories:
+# Amplifier | Analyst(Extender) | Bridger | Adverser
+role_transition_prior:
+  Bridger:
+    Amplifier: 0.45
+    Bridger: 0.30
+    Analyst: 0.18
+    Adverser: 0.07
+  Amplifier:
+    Amplifier: 0.42
+    Bridger: 0.24
+    Analyst: 0.22
+    Adverser: 0.12
+  Analyst:
+    Amplifier: 0.40
+    Bridger: 0.24
+    Analyst: 0.20
+    Adverser: 0.16
+  Adverser:
+    Amplifier: 0.33
+    Bridger: 0.27
+    Analyst: 0.20
+    Adverser: 0.20

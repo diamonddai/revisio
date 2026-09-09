@@ -1,0 +1,95 @@
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color: #333;
+  background-color: #EDEFF2;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* 与 UI 设计稿一致：圆角与色板 */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --color-header: #5a5e66;
+  --color-btn-primary: #5a5e66;
+  --color-panel-bg: #f5f6f8;
+  --color-card-bg: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-width: 320px;
+  height: 100%;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #EDEFF2;
+  overflow: hidden;
+}
+
+/* 设置模拟面板滑块：轨道与圆手柄通过外层 .setup-panel-slider-wrap 一起上移 1px */
+.setup-panel-slider.ant-slider .ant-slider-handle {
+  background: transparent !important;
+  border: none !important;
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+.setup-panel-slider.ant-slider .ant-slider-handle:hover,
+.setup-panel-slider.ant-slider .ant-slider-handle:focus,
+.setup-panel-slider.ant-slider .ant-slider-handle:focus-visible,
+.setup-panel-slider.ant-slider .ant-slider-handle:active,
+.setup-panel-slider.ant-slider.ant-slider-dragging .ant-slider-handle {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.setup-panel-slider.ant-slider .ant-slider-handle::before {
+  border-radius: 50% !important;
+  box-shadow: none !important;
+  outline: none !important;
+  /* 内圈边缘：D1D4EA，inside，weight 0.6 */
+  border: 0.6px solid #D1D4EA !important;
+  box-sizing: border-box !important;
+}
+
+/* 避免 Ant Design Card 子元素或伪元素遮挡设置面板 Agent 池底部 */
+.ant-card-body::after {
+  display: none !important;
+}
+
+/* 设置面板平台选择框：仅保留外层边框，去除内嵌线 */
+.setup-panel-platform-select-wrap .ant-select {
+  height: 100% !important;
+}
+.setup-panel-platform-select-wrap .ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  height: 100% !important;
+  padding-inline: 11px !important;
+}
+.setup-panel-platform-select-wrap .ant-select-selector::before,
+.setup-panel-platform-select-wrap .ant-select-selector::after {
+  display: none !important;
+}
+.setup-panel-platform-select-wrap .ant-select-focused .ant-select-selector,
+.setup-panel-platform-select-wrap .ant-select:hover .ant-select-selector {
+  border: none !important;
+  box-shadow: none !important;
+}
+.setup-panel-platform-select-wrap .ant-select-selection-item,
+.setup-panel-platform-select-wrap .ant-select-selection-placeholder {
+  color: #697281 !important;
+  font-size: 12px !important;
+}

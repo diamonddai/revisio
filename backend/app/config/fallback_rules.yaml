@@ -1,0 +1,78 @@
+rule_source: fallback
+rule_version: v1
+
+personas:
+  Amplifier:
+    - id: amp_local_1
+      role: "Amplifier"
+      motivation: "增强传播"
+      style: "转发并轻度放大"
+      category: "Amplifier"
+  Analyst:
+    - id: analyst_local_1
+      role: "Analyst"
+      motivation: "解释与校对"
+      style: "文本重写与补充说明"
+      category: "Analyst"
+  Bridger:
+    - id: bridger_local_1
+      role: "Bridger"
+      motivation: "跨圈层沟通"
+      style: "中和冲突、保留主信息"
+      category: "Bridger"
+  Adverser:
+    - id: adverser_local_1
+      role: "Adverser"
+      motivation: "对抗叙事"
+      style: "高冲突改写"
+      category: "Adverser"
+
+operation_whitelist:
+  Amplifier:
+    - "change_title"
+    - "add_annotation"
+    - "change_color"
+    - "simplify_axis"
+  Analyst:
+    # Extender: expands topic context — does NOT filter/select data variables
+    - "change_title"
+    - "add_annotation"
+    - "add_data_variables"
+    - "add_legend"
+    - "change_data_granularity"
+    - "change_axis_scale"
+  Bridger:
+    - "change_title"
+    - "add_annotation"
+    - "change_color"
+    - "simplify_axis"
+  Adverser:
+    - "change_title"
+    - "add_annotation"
+    - "select_data_range"
+    - "change_color"
+    - "change_chart_type"
+    - "simplify_axis"
+    - "delete_source"
+
+shift_prior:
+  Amplifier:
+    resonance: minor
+    tension: minor
+    conflict: sig
+    noise: none
+  Analyst:
+    resonance: minor
+    tension: sig
+    conflict: sig
+    noise: none
+  Bridger:
+    resonance: minor
+    tension: minor
+    conflict: sig
+    noise: none
+  Adverser:
+    resonance: minor
+    tension: sig
+    conflict: major
+    noise: none

@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "case_id": "atmospheric_co2_concentration",
+    "title": "Atmospheric CO₂ concentration",
+    "subtitle": null,
+    "description": "Observed and forecasted monthly atmospheric CO₂ concentrations at Mauna Loa Observatory, highlighting specific forecast uncertainty bands for the years 2016 through 2019.",
+    "data_source": "Met Office / Scripps Institution of Oceanography",
+    "data_source_url": "https://climate.metoffice.cloud/greenhouse_gases.html#datasets"
+  },
+
+  "data": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "unit": "Year",
+      "domain": ["2014-06", "2020-03"]
+    },
+    "y": {
+      "field": "CO2",
+      "type": "quantitative",
+      "unit": "ppm",
+      "domain": [392, 421]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 700,
+    "height": 450,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        { "test": "datum == 'Observed data'", "value": "#222222" },
+        { "test": "datum == '2016 forecast'", "value": "#0ebde6" },
+        { "test": "datum == '2017 forecast'", "value": "#3ce16b" },
+        { "test": "datum == '2018 forecast'", "value": "#ff7a8b" },
+        { "test": "datum == '2019 forecast'", "value": "#fd9934" }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Atmospheric CO₂ concentration",
+    "subtitle": null,
+    "data_source": "Met Office / Scripps Institution of Oceanography",
+    "data_source_url": "https://climate.metoffice.cloud/greenhouse_gases.html#datasets",
+    "annotations": []
+  }
+}

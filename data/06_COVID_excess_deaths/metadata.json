@@ -1,0 +1,57 @@
+{
+  "meta": {
+    "case_id": "uk_covid_weekly_deaths_2020",
+    "title": "Number of deaths registered by week, England and Wales",
+    "subtitle": "28 December 2019 to 20 November 2020",
+    "description": "Weekly registered deaths involving and not involving COVID-19 compared to the historical five-year average across England and Wales up to Week 47 of 2020.",
+    "data_source": "Office for National Statistics",
+    "data_source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths"
+  },
+
+  "data": {
+    "x": {
+      "field": "w",
+      "type": "ordinal",
+      "unit": "Week",
+      "domain": [1, 47]
+    },
+    "y": {
+      "field": "deaths",
+      "type": "quantitative",
+      "unit": "Number of deaths",
+      "domain": [0, 25000]
+    }
+  },
+
+  "chart": {
+    "type": "bar",
+    "width": 800,
+    "height": 450,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        {
+          "test": "datum == 'Deaths not involving COVID-19'",
+          "value": "#34a58b"
+        },
+        { "test": "datum == 'Deaths involving COVID-19'", "value": "#29638f" },
+        {
+          "test": "datum == 'All deaths - Five-year average'",
+          "value": "#424a4c"
+        }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Number of deaths registered by week, England and Wales",
+    "subtitle": "28 December 2019 to 20 November 2020",
+    "data_source": "Office for National Statistics",
+    "data_source_url": "https://www.ons.gov.uk/peoplepopulationandcommunity/birthsdeathsandmarriages/deaths",
+    "annotations": [
+      "Deaths not involving COVID-19 remained below the five-year average in Week 47"
+    ]
+  }
+}

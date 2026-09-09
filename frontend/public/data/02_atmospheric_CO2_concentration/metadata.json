@@ -1,0 +1,51 @@
+{
+  "meta": {
+    "case_id": "atmospheric_co2_concentration",
+    "title": "Atmospheric CO₂ concentration",
+    "subtitle": null,
+    "description": "Monthly atmospheric CO₂ concentration data covering the observed values and simulated forecast periods restricted between mid-2014 and mid-2020.",
+    "data_source": "WMO WDCGG",
+    "data_source_url": "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates"
+  },
+
+  "data": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "unit": "Year",
+      "domain": ["2014-06", "2020-06"]
+    },
+    "y": {
+      "field": "WDCGG CO2 (ppm)",
+      "type": "quantitative",
+      "unit": "ppm",
+      "domain": [392, 420.5]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 750,
+    "height": 450,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        { "test": "datum == 'Observed data'", "value": "#222222" },
+        { "test": "datum == '2016 forecast'", "value": "#00bcd4" },
+        { "test": "datum == '2017 forecast'", "value": "#4ade80" },
+        { "test": "datum == '2018 forecast'", "value": "#ff6b6b" },
+        { "test": "datum == '2019 forecast'", "value": "#fb923c" }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Atmospheric CO₂ concentration",
+    "subtitle": null,
+    "data_source": "WMO WDCGG",
+    "data_source_url": "https://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/legal_amazon/rates",
+    "annotations": []
+  }
+}

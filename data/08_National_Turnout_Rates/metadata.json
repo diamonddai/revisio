@@ -1,0 +1,53 @@
+{
+  "meta": {
+    "case_id": "us_election_turnout_rates",
+    "title": "United States Turnout Rates 1789-Present",
+    "subtitle": null,
+    "description": "Historical voter turnout rates for US Presidential and Midterm elections, showcasing trends from 1789 to 2024.",
+    "data_source": "UF Election Lab",
+    "data_source_url": "https://election.lab.ufl.edu/"
+  },
+
+  "data": {
+    "x": {
+      "field": "YEAR",
+      "type": "quantitative",
+      "unit": "Year",
+      "domain": [
+        1789,
+        2024
+      ]
+    },
+    "y": {
+      "field": "Rate",
+      "type": "quantitative",
+      "unit": "%",
+      "domain": [0, 1]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 950,
+    "height": 280,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [
+        { "test": "datum == 'Presidential'", "value": "#1976d2" },
+        { "test": "datum == 'Midterm'", "value": "#ed7d31" }
+      ]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "United States Turnout Rates 1789-Present",
+    "subtitle": null,
+    "data_source": "UF Election Lab",
+    "data_source_url": "https://election.lab.ufl.edu/",
+    "annotations": [
+      "Created by the UF Election Lab (election.lab.ufl.edu)"
+    ]
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "case_id": "civilian_unemployment_rate",
+    "title": "Civilian unemployment rate, seasonally adjusted",
+    "subtitle": "Click and drag within the chart to zoom in on time periods",
+    "description": "Historical US Civilian Unemployment Rate (Total) covering 2006 to 2026, highlighting major economic recessions with shaded grey bands.",
+    "data_source": "U.S. Bureau of Labor Statistics",
+    "data_source_url": "https://www.bls.gov/charts/employment-situation/civilian-unemployment-rate.htm"
+  },
+
+  "data": {
+    "x": {
+      "field": "date",
+      "type": "temporal",
+      "unit": "Year",
+      "domain": ["2006", "2026"]
+    },
+    "y": {
+      "field": "rate",
+      "type": "quantitative",
+      "unit": "%",
+      "domain": [2.0, 16.0]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 900,
+    "height": 550,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "rules": [{ "test": "datum == 'Total'", "value": "#990000" }]
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "Civilian unemployment rate, seasonally adjusted",
+    "subtitle": "Click and drag within the chart to zoom in on time periods",
+    "data_source": "U.S. Bureau of Labor Statistics",
+    "data_source_url": "https://www.bls.gov/charts/employment-situation/civilian-unemployment-rate.htm",
+    "annotations": []
+  }
+}

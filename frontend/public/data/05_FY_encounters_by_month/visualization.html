@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vega@6.2.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@6.4.1"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@7.1.0"></script>
+</head>
+<body>
+  <div id="vis"/>
+  <script>
+    const spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v6.json",
+  "width": 860,
+  "height": 460,
+  "background": "#ffffff",
+  "padding": {"left": 60, "right": 20, "top": 20, "bottom": 40},
+  "title": {
+    "text": "FY Southwest Land Border Encounters by Month",
+    "anchor": "middle",
+    "fontSize": 22,
+    "fontWeight": "bold",
+    "color": "#ffffff",
+    "offset": 10
+  },
+  "config": {
+    "title": {
+      "frame": "group",
+      "background": "#1f4e79",
+      "padding": 12,
+      "dy": 6
+    },
+    "view": {"stroke": null},
+    "axis": {"labelFontSize": 14, "titleFontSize": 16}
+  },
+  "data": {
+    "values": [
+      {"FY": "2023", "Month": "OCT", "Value": 231529},
+      {"FY": "2023", "Month": "NOV", "Value": 235173},
+      {"FY": "2023", "Month": "DEC", "Value": 252315},
+      {"FY": "2023", "Month": "JAN", "Value": 157358},
+      {"FY": "2023", "Month": "FEB", "Value": 156630},
+      {"FY": "2023", "Month": "MAR", "Value": 193249},
+      {"FY": "2023", "Month": "APR", "Value": 211992},
+      {"FY": "2023", "Month": "MAY", "Value": 206690},
+      {"FY": "2023", "Month": "JUN", "Value": 144556},
+      {"FY": "2023", "Month": "JUL", "Value": 183479},
+      {"FY": "2023", "Month": "AUG", "Value": 232963},
+      {"FY": "2023", "Month": "SEP", "Value": 269735},
+      {"FY": "2024", "Month": "OCT", "Value": 240927},
+      {"FY": "2024", "Month": "NOV", "Value": 242399},
+      {"FY": "2024", "Month": "DEC", "Value": 301981},
+      {"FY": "2024", "Month": "JAN", "Value": 176195},
+      {"FY": "2024", "Month": "FEB", "Value": 189913},
+      {"FY": "2024", "Month": "MAR", "Value": 189359},
+      {"FY": "2024", "Month": "APR", "Value": 179737},
+      {"FY": "2024", "Month": "MAY", "Value": 170716},
+      {"FY": "2024", "Month": "JUN", "Value": 130415},
+      {"FY": "2024", "Month": "JUL", "Value": 104100},
+      {"FY": "2024", "Month": "AUG", "Value": 107473},
+      {"FY": "2024", "Month": "SEP", "Value": 101790},
+      {"FY": "2025", "Month": "OCT", "Value": 106316},
+      {"FY": "2025", "Month": "NOV", "Value": 94183},
+      {"FY": "2025", "Month": "DEC", "Value": 96033},
+      {"FY": "2025", "Month": "JAN", "Value": 61445},
+      {"FY": "2025", "Month": "FEB", "Value": 11710},
+      {"FY": "2025", "Month": "MAR", "Value": 11011},
+      {"FY": "2025", "Month": "APR", "Value": 12023},
+      {"FY": "2025", "Month": "MAY", "Value": 12450},
+      {"FY": "2025", "Month": "JUN", "Value": 9300},
+      {"FY": "2025", "Month": "JUL", "Value": 7822},
+      {"FY": "2025", "Month": "AUG", "Value": 9731},
+      {"FY": "2025", "Month": "SEP", "Value": 11647},
+      {"FY": "2026 (FYTD)", "Month": "OCT", "Value": 11704},
+      {"FY": "2026 (FYTD)", "Month": "NOV", "Value": 10957},
+      {"FY": "2026 (FYTD)", "Month": "DEC", "Value": 9991},
+      {"FY": "2026 (FYTD)", "Month": "JAN", "Value": 9726}
+    ]
+  },
+  "mark": {"type": "line", "strokeWidth": 4, "clip": true},
+  "encoding": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "sort": [
+        "OCT",
+        "NOV",
+        "DEC",
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP"
+      ],
+      "axis": {
+        "title": null,
+        "labelAngle": 0,
+        "labelPadding": 14,
+        "tickSize": 0,
+        "domain": false,
+        "grid": false
+      }
+    },
+    "y": {
+      "field": "Value",
+      "type": "quantitative",
+      "scale": {"domain": [0, 300000]},
+      "axis": {
+        "title": "Encounter Count",
+        "values": [0, 50000, 100000, 150000, 200000, 250000, 300000],
+        "labelExpr": "format(datum.value/1000, '.0f') + 'K'",
+        "grid": true,
+        "gridDash": [2, 4],
+        "gridColor": "#d0d0d0",
+        "ticks": false,
+        "domain": false
+      }
+    },
+    "color": {
+      "field": "FY",
+      "type": "nominal",
+      "scale": {
+        "domain": ["2023", "2024", "2025", "2026 (FYTD)"],
+        "range": ["#5a6069", "#ff7a00", "#c85300", "#63a6d8"]
+      },
+      "legend": {
+        "title": "FY",
+        "orient": "top",
+        "direction": "horizontal",
+        "titleFontSize": 14,
+        "labelFontSize": 14,
+        "symbolType": "square",
+        "symbolSize": 220
+      }
+    },
+    "tooltip": [
+      {"field": "FY", "type": "nominal"},
+      {"field": "Month", "type": "ordinal"},
+      {"field": "Value", "type": "quantitative", "format": ","}
+    ]
+  }
+};
+    vegaEmbed("#vis", spec, {mode: "vega-lite"}).then(console.log).catch(console.warn);
+  </script>
+</body>
+</html>

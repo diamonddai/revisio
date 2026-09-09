@@ -1,0 +1,11 @@
+# Maps taxonomy case_id -> relative path under project root data/ directory.
+# Only cases with available chart_spec.json are included.
+
+C01: data/06_COVID_excess_deaths
+C02: data/01_global_temperature
+C04: data/04_amazon_deforestation
+C07: data/03_civilian_unemployment
+C08: data/05_FY_encounters_by_month
+C11: data/02_atmospheric_CO2_concentration
+C22: data/08_National_Turnout_Rates
+C23: data/09_Economic_recession_probability

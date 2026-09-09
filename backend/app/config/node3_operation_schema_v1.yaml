@@ -1,0 +1,315 @@
+schema_version: node3_operation_schema_v1
+status: draft
+source_of_truth:
+  - docs/taxonomy/taxonomy_codebook.md
+  - docs/taxonomy/node3_operation_schema_v1.md
+
+limits:
+  max_operations_per_step: 5
+  allowed_shift_values: [none, minor, sig, major]
+  shift_alias:
+    significant: sig
+
+mutual_exclusive_rules:
+  - [add_title, change_title]
+  - [add_annotation, change_annotation]
+
+operation_catalog:
+  select_data_variables:
+    layer: data
+    aliases: ["select data variables"]
+  add_data_variables:
+    layer: data
+    aliases: ["add data variables"]
+  select_data_range:
+    layer: data
+    aliases: ["select time range"]
+  change_data_granularity:
+    layer: data
+    aliases: ["change data granularity"]
+
+  change_chart_type:
+    layer: visual
+    aliases: ["change type"]
+  change_color:
+    layer: visual
+    aliases: ["change color"]
+  add_background:
+    layer: visual
+    aliases: ["add background"]
+  simplify_axis:
+    layer: visual
+    aliases: ["simplify axis"]
+  change_aspect_ratio:
+    layer: visual
+    aliases: ["change aspect ratio"]
+  change_axis_scale:
+    layer: visual
+    aliases: ["change axis scale"]
+
+  change_title:
+    layer: text
+    aliases: ["change title"]
+  add_annotation:
+    layer: text
+    aliases: ["add annotation"]
+  change_annotation:
+    layer: text
+    aliases: ["change annotation"]
+  delete_source:
+    layer: text
+    aliases: ["delete source"]
+  change_legend:
+    layer: text
+    aliases: ["change legend"]
+  add_legend:
+    layer: text
+    aliases: ["add legend"]
+
+default_execution_order:
+  - delete_source
+  - select_data_range
+  - select_data_variables
+  - add_data_variables
+  - change_data_granularity
+  - change_chart_type
+  - change_axis_scale
+  - simplify_axis
+  - change_aspect_ratio
+  - change_color
+  - add_background
+  - change_title
+  - change_legend
+  - add_legend
+  - change_annotation
+  - add_annotation
+
+policies:
+  simplify_axis:
+    strategy: simplify_x_axis_first
+    target_channels:
+      - x
+    controls:
+      labels: false
+      ticks: false
+      grid: false
+      title: null
+
+  add_annotation:
+    strategy: in_chart_first_then_metadata_fallback
+    in_chart:
+      insert_mode: append_layer_text_mark
+      default_mark:
+        type: text
+        align: left
+        baseline: top
+        color: "#444444"
+        fontSize: 12
+      default_position:
+        x: 12
+        y: 24
+    fallback_paths:
+      - "$.description"
+      - "$.usermeta.annotations"
+
+  delete_source:
+    strategy: remove_visible_attribution_text_only
+    candidate_paths:
+      - "$.layer[*].mark.text"
+      - "$.description"
+      - "$.usermeta.source"
+    match:
+      mode: prefix_case_insensitive
+      prefixes:
+        - "source:"
+        - "sources:"
+        - "data source"
+        - "via"
+        - "from"
+    protected_paths:
+      - "$.data"
+      - "$.datasets"
+      - "$.transform"
+      - "$.encoding"
+      - "$.layer[*].data"
+      - "$.layer[*].transform"
+
+  add_legend:
+    strategy: only_when_missing_legend_and_emphasis_intent
+    preconditions:
+      require_existing_legend: false
+      require_intent_keywords:
+        - emphasize
+        - highlight
+        - focus
+        - "强调"
+        - "突出"
+
+intent_conventions:
+  change_title:
+    supported_prefixes:
+      - "title:"
+      - "headline:"
+    behavior: "When present, executor uses the suffix as exact target title."
+  change_color:
+    semantic_tokens:
+      risk_alarm: ["risk", "danger", "alarm", "threat", "危机", "风险"]
+      forest_theme: ["forest", "amazon", "deforestation", "environment", "森林", "环保"]
+      neutral_objective: ["neutral", "objective", "balance", "中性", "客观", "平衡"]
+    explicit_hex_allowed: true
+  add_annotation:
+    data_grounded_text_required: true
+    behavior: "Executor prefers plain data-grounded text; trendline and wrapping are controlled by params."
+
+params_conventions:
+  change_title:
+    max_line_chars:
+      type: integer
+      default: 36
+      behavior: "Wrap long title text to multiple lines."
+  add_annotation:
+    include_trendline:
+      type: boolean
+      default: false
+      behavior: "When true, executor adds a trend rule layer in chart."
+    max_line_chars:
+      type: integer
+      default: 34
+      behavior: "Wrap long annotation text to multiple lines while keeping sentence complete."
+    min_font_size:
+      type: integer
+      default: 14
+      behavior: "Ensure annotation text remains legible."
+    prune_offtopic_annotations:
+      type: boolean
+      default: true
+      behavior: "Remove existing annotation text that does not match narrative keywords."
+    narrative_keywords:
+      type: array[string]
+      default: []
+      behavior: "Keywords used to keep/remove existing annotation snippets."
+  change_annotation:
+    max_line_chars:
+      type: integer
+      default: 32
+      behavior: "Wrap updated annotation text to multiple lines while keeping sentence complete."
+    min_font_size:
+      type: integer
+      default: 14
+      behavior: "Ensure updated annotation text remains legible."
+    prune_offtopic_annotations:
+      type: boolean
+      default: true
+      behavior: "Remove old off-topic annotation text before rewrite."
+    narrative_keywords:
+      type: array[string]
+      default: []
+      behavior: "Keywords used to keep/remove existing annotation snippets."
+    emphasis_style:
+      type: string
+      enum: ["none", "amplify"]
+      default: "none"
+      behavior: "amplify applies stronger visual emphasis (uppercase when applicable, heavier weight, larger text)."
+  change_color:
+    scope:
+      type: string
+      enum: ["mark", "chart_global"]
+      default: "chart_global"
+      behavior: "chart_global updates data marks, encoding color ranges, and config range palette (excludes text marks)."
+    palette_style:
+      type: string
+      enum: ["default", "social_contrast"]
+      default: "default"
+      behavior: "social_contrast uses vivid high-contrast palette variants for Amplifier/Adverser media-social contexts."
+  simplify_axis:
+    target_axis:
+      type: string
+      enum: ["x", "y", "both"]
+      default: "x"
+      behavior: "Choose which axis channel to simplify."
+    mode:
+      type: string
+      enum: ["compact_hide", "interval_labels"]
+      default: "compact_hide"
+      behavior: "interval_labels keeps sparse readable ticks; compact_hide hides labels/ticks."
+    label_interval:
+      type: integer
+      default: 5
+      behavior: "When mode=interval_labels and axis is quantitative, keep labels every N ticks."
+  select_data_range:
+    x_field:
+      type: string
+      required: false
+      behavior: "Optional explicit x field for filtering."
+    start:
+      type: any
+      required: false
+      behavior: "Inclusive range start."
+    end:
+      type: any
+      required: false
+      behavior: "Inclusive range end."
+    execution_note:
+      type: string
+      default: "js_filter_expression"
+      behavior: "Executor uses datum-based JS filter expression for stronger cross-type compatibility."
+
+strategy_guidance:
+  goal: "Use who(role) + where(platform/institution) + content topic signals to choose how(operations)."
+  role_signatures:
+    Amplifier:
+      preferred_layers: ["text", "visual"]
+      discouraged_layers: ["data"]
+      typical_ops: ["change_title", "change_color", "add_annotation", "simplify_axis", "add_background"]
+    Analyst:
+      preferred_layers: ["data", "text"]
+      discouraged_layers: []
+      typical_ops: ["select_data_variables", "change_title", "add_annotation", "change_legend", "add_legend"]
+    Bridger:
+      preferred_layers: ["visual", "text"]
+      discouraged_layers: ["data"]
+      typical_ops: ["change_color", "change_title", "add_annotation", "change_chart_type"]
+    Adverser:
+      preferred_layers: ["data", "text", "visual"]
+      discouraged_layers: []
+      typical_ops: ["select_data_range", "delete_source", "change_title", "change_color", "add_annotation"]
+  platform_intensity_bias:
+    t1_authority: minimal_to_moderate
+    t2_media: moderate
+    t3_social: moderate_to_substantial
+  topic_examples:
+    deforestation:
+      amplifier_example:
+        - operation: change_title
+          intent: "title: Amazon Deforestation Highest Since 2006"
+        - operation: change_color
+          intent: "theme forest green highlight"
+        - operation: simplify_axis
+          intent: "focus attention on the key trend"
+      adverser_example:
+        - operation: change_title
+          intent: "title: Rate of Deforestation Fell in 2023"
+        - operation: change_color
+          intent: "risk alarm red contrast"
+        - operation: simplify_axis
+          intent: "focus attention on selected period only"
+
+validation:
+  required_one_of:
+    - "$.mark"
+    - "$.layer"
+  ensure_renderable: true
+  per_op_failure_action: skip_op
+  node_failure_action: node_rollback
+  terminal_failure_action: fallback_text
+
+provenance:
+  required_fields:
+    - operation
+    - params
+    - target_paths
+    - before
+    - after
+    - status
+    - error
+

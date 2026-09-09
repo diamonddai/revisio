@@ -1,0 +1,73 @@
+{
+  "meta": {
+    "case_id": "02_cbp_sw_land_border_encounters",
+    "title": "FY Southwest Land Border Encounters by Month",
+    "subtitle": null,
+    "description": "Monthly Southwest Land Border encounters by fiscal year (FY). FY2026 is year-to-date (FYTD).",
+    "data_source": "U.S. Customs and Border Protection (CBP)",
+    "data_source_url": "https://www.cbp.gov/newsroom/stats/southwest-land-border-encounters"
+  },
+
+  "data": {
+    "x": {
+      "field": "Month",
+      "type": "ordinal",
+      "unit": null,
+      "domain": [
+        "OCT",
+        "NOV",
+        "DEC",
+        "JAN",
+        "FEB",
+        "MAR",
+        "APR",
+        "MAY",
+        "JUN",
+        "JUL",
+        "AUG",
+        "SEP"
+      ]
+    },
+    "y": {
+      "field": "Value",
+      "type": "quantitative",
+      "unit": "encounters",
+      "domain": [0, 300000]
+    },
+    "series": {
+      "field": "FY",
+      "type": "nominal",
+      "domain": ["2023", "2024", "2025", "2026 (FYTD)"]
+    }
+  },
+
+  "chart": {
+    "type": "line",
+    "width": 860,
+    "height": 460,
+    "background": "#ffffff",
+    "color": {
+      "type": "categorical",
+      "mapping": [
+        { "key": "2023", "value": "#5a6069" },
+        { "key": "2024", "value": "#ff7a00" },
+        { "key": "2025", "value": "#c85300" },
+        { "key": "2026 (FYTD)", "value": "#63a6d8" }
+      ]
+    },
+    "grid": {
+      "axis": "y",
+      "dash": [2, 4],
+      "color": "#d0d0d0"
+    },
+    "trend_lines": null
+  },
+
+  "text": {
+    "title": "FY Southwest Land Border Encounters by Month",
+    "subtitle": null,
+    "data_source": "U.S. Customs and Border Protection (CBP)",
+    "data_source_url": "https://www.cbp.gov/newsroom/stats/southwest-land-border-encounters",
+    "annotations": []
+  }
+}
