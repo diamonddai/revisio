@@ -83,17 +83,5 @@ cd backend
 ./scripts/dev.sh
 ```
 
-The API is documented in [`docs/api/接口文档.md`](docs/api/接口文档.md). Main endpoints: `POST /api/upload`, `POST /api/simulation/start`, `GET /api/health`.
 
-## Citation
 
-If you find Revisio useful, please consider citing our paper:
-
-```bibtex
-@article{revisio,
-  title   = {Revisio: Simulating Framing Shifts of Data Visualizations in Online Discourse},
-  author  = {...},
-  journal = {...},
-  year    = {...}
-}
-```
